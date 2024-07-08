@@ -4,32 +4,38 @@
     </div>
   
     <div class="accordion">
+     @for(mainCategory of getCategories(); track mainCategory.id;){
       <div class="accordion-item individual-category">
         <div class="accordion-header">
           <button
             class="accordion-button"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseOne"
+            [attr.data-bs-target]="'#collapse' + $index"
           >
             <div class="category-title">
-              <a href="#">Category</a>
+              <a href="#">{{mainCategory.category}}</a>
             </div>
           </button>
         </div>
         <div
-          id="collapseOne"
+          [id]="'collapse' + $index"
           class="accordion-collapse collapse show"
-          data-bs-parent="#accordionExample"
         >
           <div class="accordion-body">
             <ul>
-              <li class="sub-items"><a href="#">Item 1</a></li>
-              <li class="sub-items"><a href="#">Item 2</a></li>
+              @for(subcategory of getCategories(mainCategory.id); track subcategory.id;)
+              {
+                <li class="sub-items">
+                  <a href="#">{{ subcategory.category }}</a>
+                </li>
+              }
             </ul>
           </div>
         </div>
       </div>
+     }
+
     </div>
-  </div>
+</div>
   
